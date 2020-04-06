@@ -1,6 +1,6 @@
 const { Builder, By } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
-const { expect } = require("chai");
+const { assert } = require("chai");
 
 require("chromedriver");
 
@@ -25,9 +25,9 @@ describe("Sandbox", () => {
 
   it("Should be on Sandbox", async () => {
     const title = await browser.getTitle();
-    const header = await browser.findElement(By.css("h1"));
+    assert.strictEqual(title, "Sandbox");
 
-    expect(title).to.equal("Sandbox");
-    expect(await header.getText()).to.equal("Sandbox");
+    const header = await browser.findElement(By.css("h1")).getText();
+    assert.strictEqual(header, "Sandbox");
   });
 });
